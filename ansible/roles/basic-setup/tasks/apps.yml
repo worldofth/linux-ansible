@@ -8,7 +8,6 @@
   package:
     name: "{{ wine_deps }}"
     state: present
-    extra_args: '--needed'
 
 - name: Install snap app packages
   snap:
