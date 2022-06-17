@@ -17,13 +17,13 @@
 
 - name: Download Tabby terminal
   get_url:
-    url: "https://github.com/Eugeny/tabby/releases/download/v{{ tabby_version }}/tabby-{{ tabby_version }}-linux.deb"
-    dest: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux.deb"
+    url: "https://github.com/Eugeny/tabby/releases/download/v{{ tabby_version }}/tabby-{{ tabby_version }}-linux-x64.deb"
+    dest: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux-x64.deb"
   when: my_package_check_deb.rc == 1
 
 - name: install Tabby
   apt:
-    deb: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux.deb"
+    deb: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux-x64.deb"
   when: my_package_check_deb.rc == 1
 
 - name: download PIA
