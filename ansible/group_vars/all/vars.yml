@@ -15,7 +15,7 @@ cli_apps:
   - stow
   - bat
   - exa
-  - fd
+  - fd-find
   - procs
   - sd
   - ripgrep
