@@ -31,10 +31,18 @@
     clone: yes
     update: yes
 
-- name: Install starship
-  package:
-    name: starship
-    state: latest
+- name: Download starship
+  get_url: 
+    url: https://starship.rs/install.sh dest=/tmp/starship-installer.sh
+    
+- name: Execute the starship-installer.sh
+  shell: /tmp/starship-installer.sh
+
+- name: Remove the starship-installer.sh
+  file: 
+    path: /tmp/starship-installer.sh
+    state: absent
+
 
 - name: Install nvm
   git:
