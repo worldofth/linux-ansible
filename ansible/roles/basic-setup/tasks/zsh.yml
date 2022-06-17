@@ -33,8 +33,10 @@
 
 - name: Download starship
   get_url: 
-    url: https://starship.rs/install.sh dest=/tmp/starship-installer.sh
-    
+    url: https://starship.rs/install.sh 
+    dest: /tmp/starship-installer.sh
+    mode: 0755
+
 - name: Execute the starship-installer.sh
   shell: /tmp/starship-installer.sh
 
