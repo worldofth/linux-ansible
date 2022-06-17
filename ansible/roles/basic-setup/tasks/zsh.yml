@@ -37,15 +37,6 @@
     dest: /tmp/starship-installer.sh
     mode: 0755
 
-- name: Execute the starship-installer.sh
-  shell: /tmp/starship-installer.sh
-
-- name: Remove the starship-installer.sh
-  file: 
-    path: /tmp/starship-installer.sh
-    state: absent
-
-
 - name: Install nvm
   git:
     repo: https://github.com/nvm-sh/nvm.git
