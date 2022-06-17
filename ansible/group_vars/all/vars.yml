@@ -16,7 +16,6 @@ cli_apps:
   - bat
   - exa
   - fd-find
-  - procs
   - sd
   - ripgrep
 wine_deps:
