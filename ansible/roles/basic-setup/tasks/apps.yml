@@ -4,11 +4,6 @@
     name: "{{ install_apps }}"
     state: latest
 
-- name: Install wine deps
-  package:
-    name: "{{ wine_deps }}"
-    state: present
-
 - name: Install snap app packages
   snap:
     name: "{{ install_snap_apps }}"
