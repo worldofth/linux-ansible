@@ -11,6 +11,7 @@ install_snap_apps:
 install_snap_classic:
   - vscode
 cli_apps:
+  - zsh
   - fonts-firacode
   - stow
   - bat
