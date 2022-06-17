@@ -1,0 +1,59 @@
+---
+- name: Install cli packages
+  package:
+    name: "{{ cli_apps }}"
+    state: latest
+
+- name: Install oh-my-zsh
+  become: true
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "/home/{{ username }}/.oh-my-zsh"
+    clone: yes
+    update: yes
+
+- name: Install zsh syntax highlighting
+  become: true
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "/home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    clone: yes
+    update: yes
+
+- name: Install zsh autosuggestions
+  become: true
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "/home/{{ username }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    clone: yes
+    update: yes
+
+- name: Install starship
+  package:
+    name: starship
+    state: latest
+
+- name: Install nvm
+  git:
+    repo: https://github.com/nvm-sh/nvm.git
+    dest: "/home/{{ username }}/.nvm"
+    clone: yes
+    update: yes
+    version: v0.39.1
+
+- name: clone dotfiles
+  become: true
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/worldofth/dotfiles
+    dest: "/home/{{ username }}/dotfiles"
+    clone: yes
+    update: yes
+
+- name: run dotfile install
+  become: true
+  become_user: "{{ username }}"
+  shell: "cd /home/{{ username }}/dotfiles/ && ./install.sh"

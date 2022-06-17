@@ -1,0 +1,5 @@
+---
+- include_tasks: essentials.yml
+- include_tasks: zsh.yml
+- include_tasks: apps.yml
+- include_tasks: mount.yml

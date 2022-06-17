@@ -1,0 +1,23 @@
+---
+- name: create mount location
+  file:
+    path: "{{ item.mount }}"
+    state: directory
+    owner: "{{ username }}"
+    mode: '0777'
+  loop: "{{ devices }}"
+
+- name: gather device uuids
+  command: lsblk {{ item.device }} -no UUID
+  loop: "{{ devices }}"
+  register: uuid
+
+- name: mount hdd
+  mount:
+    path: "{{ item.item.mount }}"
+    src: "UUID={{ item.stdout_lines[0] }}"
+    state: mounted
+    fstype: ext4
+    opts: defaults,noatime
+  loop: "{{ uuid.results }}"
+  

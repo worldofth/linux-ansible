@@ -1,0 +1,40 @@
+---
+- name: Install app packages
+  package:
+    name: "{{ install_apps }}"
+    state: latest
+
+- name: Install wine deps
+  package:
+    name: "{{ wine_deps }}"
+    state: present
+    extra_args: '--needed'
+
+- name: Install snap app packages
+  snap:
+    name: "{{ install_snap_apps }}"
+    state: present
+
+- name: check if tabby is installed
+  command: dpkg-query -W tabby
+  register: my_package_check_deb
+  failed_when: my_package_check_deb.rc > 1
+  changed_when: my_package_check_deb.rc == 1
+
+- name: Download Tabby terminal
+  get_url:
+    url: "https://github.com/Eugeny/tabby/releases/download/v{{ tabby_version }}/tabby-{{ tabby_version }}-linux.deb"
+    dest: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux.deb"
+  when: my_package_check_deb.rc == 1
+
+- name: install Tabby
+  apt:
+    deb: "/home/{{ username }}/Downloads/tabby-{{ tabby_version }}-linux.deb"
+  when: my_package_check_deb.rc == 1
+
+- name: download PIA
+  get_url:
+    url: "{{ pia_url }}"
+    dest: "/home/{{ username }}"
+    owner: "{{ username }}"
+    mode: '+x'
